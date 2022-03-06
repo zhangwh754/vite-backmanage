@@ -1,12 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { foo } from '@/utils/utils'
 
-defineProps<{ msg: string }>()
+onMounted(() => {
+  foo('张三', 10)
+})
 
+interface Props {
+  msg?: string
+  labels?: string[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  msg: 'hello',
+  labels: () => ['one', 'two'],
+})
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <div>
+    <h1>{{ msg }}</h1>
+    <h2>{{ labels }}</h2>
+  </div>
 </template>
 
 <style scoped>
